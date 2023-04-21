@@ -1,29 +1,41 @@
 <template>
-  <div>
+  <div class="home">
+    <div class="search">
+      <input
+        class="search"
+        type="text"
+        v-model="searching"
+        name="name"
+        placeholder="Search"
+      />
+    </div>
     <div class="container">
-      <div class="row">
-        <div class="col-md-4 mt-5" v-for="article in articles" :key="article">
-          <div class="card">
-            <h5 class="card-title">{{ article.name }}</h5>
-            <div class="ima">
-              <img
-                :src="article.urlToImage"
-                class="card-img-top"
-                alt="..."
-                style="height: 20rem; max-width: 30rem"
-              />
+      <div class="row roo">
+        <div class="col mt-5" v-for="article in articles" :key="article">
+          <div class="card" id="myUL">
+            <div class="name">
+              <h1 class="tit">
+                {{ article.title }}
+              </h1>
             </div>
-            <div class="card-body">
-              <h2>{{ article.title }}</h2>
-              <p>{{ article.description }}</p>
-              <p>{{ article.content }}</p>
-              <ul>
-                <li>{{ article.url }}</li>
-                <li>{{ article.publishedAt }}</li>
-                <li>{{ article.author }}</li>
-              </ul>
+            <div class="align">
+              <div class="ima">
+                <img :src="article.urlToImage" class="card-img-top" alt="..." />
+              </div>
+              <div class="card-body">
+                <input :id="article.url" class="ch" type="checkbox" />
+                <p>{{ article.description }}</p>
+                <p>{{ article.content }}</p>
+                <div class="text">
+                  <p>{{ article.url }}</p>
+                  <p>{{ article.publishedAt }}</p>
+                  <p>{{ article.author }}</p>
+                  <p>{{ article.title }}</p>
+                  <label :for="article.url">See Less...</label>
+                </div>
+                <label :for="article.url">See More...</label>
+              </div>
             </div>
-            <p>{{ article.title }}</p>
           </div>
         </div>
       </div>
@@ -36,23 +48,6 @@ import axios from "axios";
 import { useStore } from "vuex";
 import { computed } from "@vue/runtime-core";
 export default {
-  // data(){
-  //   return{
-  //     source: this.$store.state.articles
-  //   };
-  // },
-  // created(){
-  //   this.fetchArticles();
-  // },
-  // methods: {
-  //   async fetchArticles() {
-  //     const res = await axios.get(
-  //       `https://newsapi.org/v2/everything?q=tesla&from=2023-03-20&sortBy=publishedAt&apiKey=22ae971824c24ecba18341e0f90d497b`
-  //     );
-  //     this.source = res.data.results;
-  //     console.log(res);
-  //   },
-  // },
   setup() {
     const store = useStore();
     store.dispatch("fetchArticles");
@@ -65,11 +60,37 @@ export default {
 </script>
 
 <style>
-.card {
-  width: 20rem;
-  border: 2px solid black;
-  /* height: 10rem; */
+.home{
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
 }
+.card {
+  /* width: 80rem;  */
+  border: 2px solid black;
+  height: 100%;
+  background-color:rgb(54, 194, 241);
+  
+}
+
+.card:hover{
+  transition: 0.5s;
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.7);
+  transform: scale(1.1);
+  overflow: hidden;
+}
+
+/* .col{
+  width: 80%;
+} */
+
+.align{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+}
+
 .line {
   border: 1px solid black;
   margin-top: 1rem;
@@ -77,7 +98,8 @@ export default {
   margin-left: 5rem;
   margin-right: 5rem;
 }
-.col {
+.roo {
+  display: inline-block;
   justify-content: center;
   margin: 0;
   padding: 0;
@@ -110,5 +132,85 @@ export default {
   background-color: rgba(27, 27, 141, 0.781);
   border: 1px solid rgba(31, 31, 241, 0.733);
   color: white;
+}
+.card-body {
+  text-align: left;
+  flex-wrap: wrap;
+}
+
+.card-body p{
+  width: 100%;
+}
+
+.ima img {
+  width: 30rem;
+  height: 20rem;
+}
+
+.ima{
+  width: 30rem;
+  height: 20rem;
+  margin: 2rem;
+}
+
+.tit {
+  font-size: 25px;
+}
+
+.name {
+  /* width: 30rem; */
+  height: 7rem;
+  text-align: center;
+  display: flex;
+  text-decoration: underline;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid black;
+}
+
+.ch {
+  display: none;
+}
+.ch:checked ~ .text {
+  display: block;
+}
+.ch:checked ~ label {
+  display: none;
+}
+
+.text {
+  display: none;
+}
+
+label {
+  display: inline-block;
+  cursor: pointer;
+  color: blue;
+  margin-top: 10px;
+  /* background: grey; */
+  width: 100%;
+  /* height: 3rem; */
+}
+
+#myInput {
+  /* background-image: url('/css/searchicon.png'); */
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myUL {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tit a {
+  color: rgba(0, 0, 0, 0.622);
+  text-decoration: none;
 }
 </style>
