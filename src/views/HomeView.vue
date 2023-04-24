@@ -2,6 +2,12 @@
   <div class="homes">
     <div class="home">
       <!-- <NavBar /> -->
+      <div class="headline">
+        <h1>Welcome to<span>Newsela</span></h1>
+      </div>
+      <div class="home-logo">
+        <img src="https://i.postimg.cc/G2sBcZ9Y/newsela-high-resolution-logo-color-on-transparent-background.png" alt="">
+      </div>
       <div class="search1">
         <form @submit.prevent>
         <input
@@ -11,13 +17,14 @@
           placeholder="Search Tesla news"
           class="search"
           v-model="searchQuery" 
+          
         /></form>
         <!-- <span><ion-icon name="search-outline"></ion-icon></span> -->
       </div>
-      <div class="container" v-if="articles.length = 30">
+      <div class="container" v-if="articles.length = 30" >
         <div class="row roo">
-          <div class="col mt-5" v-for="article in filtered" :key="article.id">
-            <div class="card" id="myUL">
+          <div class="col mt-5" v-for="article in filtered" :key="article.id" data-aos="fade-up">
+            <div class="card" id="myUL" >
               <div class="name">
                 <h1 class="tit">
                   {{ article.title }}
@@ -90,6 +97,29 @@ export default {
 </script>
 
 <style>
+
+.headline{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 6rem;
+}
+
+.headline span{
+  color: red;
+  font-size: 3rem;
+  font-family:serif;
+}
+
+.home-logo{
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
 .home {
   display: inline-block;
   justify-content: center;
@@ -250,7 +280,7 @@ label {
 }
 
 .search1 {
-  margin-top: 5rem;
+  margin-top: 8rem;
   display: flex;
   justify-content: center;
   align-items: center;

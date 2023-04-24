@@ -44,6 +44,9 @@ export default {
 </style> -->
 <template>
   <div class="abo">
+    <div class="logo-image animate__animated animate__zoomInRight">
+      <img src="https://i.postimg.cc/JnkJdwQt/pngegg.png" alt="">
+    </div>
     <div class="heading">
       <h1>About</h1>
       <img
@@ -237,6 +240,18 @@ export default {};
 
 .whole {
   margin-bottom: 5rem;
+}
+
+.logo-image{
+  width: 80rem;
+  height: 30rem;
+  max-width: 100%;
+  margin-top: 6rem;
+}
+
+.logo-image img{
+  width: 80rem;
+  height: 30rem;
 }
 
 @media screen and (max-width : 650px) {

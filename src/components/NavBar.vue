@@ -27,19 +27,7 @@
             </li>
             <li class="nav-item">
               <router-link to="/about">About</router-link>
-            </li>
-            <!-- <li class="nav-item"> -->
-            <!-- <a href="#education" class="nav-link active">Education and experience</a>
-              </li>
-              <li class="nav-item">
-                <a href="#projects" class="nav-link active">Projects</a>
-              </li>
-              <li class="nav-item">
-                <a href="#testimonials" class="nav-link active">Testimonials</a>
-              </li>
-              <li class="nav-item">
-                <a href="#contact" class="nav-link active">Contact Me</a>
-              </li> -->
+            </li> 
           </ul>
         </div>
       </div>
@@ -54,14 +42,18 @@ export default {
 </script>
   <style>
 .collapse {
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
+  justify-content: end;
+  margin-right: 3rem;
   text-align: center;
 }
 
 .nav-item {
   padding-inline: 1rem;
+  font-family:cursive;
+  font-size: 20px;
 }
 
 .nav-item:hover {
@@ -73,6 +65,13 @@ export default {
   height: 1.2rem;
   margin-left: 1rem;
   border-radius: 5px;
+}
+
+
+
+.container-fluid{
+  display: flex;
+  justify-content: space-between;
 }
 
 .nav-color {
