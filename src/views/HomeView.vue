@@ -98,6 +98,33 @@ export default {
 
 <style>
 
+span{
+    position: relative;
+}
+
+span::after{
+    content: "|";
+    position: absolute;
+    right: 0;
+    color: white;
+    background-color: burlywood;
+    width: 100%;
+    animation: typing 3s steps(30) alternate infinite,
+            line 1s infinite;
+}
+
+@keyframes typing {
+    to{
+        width: 0%;
+    }
+}
+
+@keyframes line {
+    50%{
+        color: transparent;
+    }
+}
+
 .headline{
   display: flex;
   justify-content: center;
