@@ -1,39 +1,49 @@
 <template>
-  <div class="home">
-    <div class="search">
-      <input
-        class="search"
-        type="text"
-        v-model="searching"
-        name="name"
-        placeholder="Search"
-      />
-    </div>
-    <div class="container">
-      <div class="row roo">
-        <div class="col mt-5" v-for="article in articles" :key="article">
-          <div class="card" id="myUL">
-            <div class="name">
-              <h1 class="tit">
-                {{ article.title }}
-              </h1>
-            </div>
-            <div class="align">
-              <div class="ima">
-                <img :src="article.urlToImage" class="card-img-top" alt="..." />
+  <div class="homes">
+    <div class="home">
+      <!-- <NavBar /> -->
+      <div class="search1">
+        <form @submit.prevent>
+        <input
+          type="search"
+          name="search-outline"
+          id=""
+          placeholder="Search Tesla news"
+          class="search"
+          v-model="searchQuery" 
+        /></form>
+        <!-- <span><ion-icon name="search-outline"></ion-icon></span> -->
+      </div>
+      <div class="container" v-if="articles.length = 30">
+        <div class="row roo">
+          <div class="col mt-5" v-for="article in filtered" :key="article.id">
+            <div class="card" id="myUL">
+              <div class="name">
+                <h1 class="tit">
+                  {{ article.title }}
+                </h1>
               </div>
-              <div class="card-body">
-                <input :id="article.url" class="ch" type="checkbox" />
-                <p>{{ article.description }}</p>
-                <p>{{ article.content }}</p>
-                <div class="text">
-                  <p>{{ article.url }}</p>
-                  <p>{{ article.publishedAt }}</p>
-                  <p>{{ article.author }}</p>
-                  <p>{{ article.title }}</p>
-                  <label :for="article.url">See Less...</label>
+              <div class="align">
+                <div class="ima">
+                  <img
+                    :src="article.urlToImage"
+                    class="card-img-top"
+                    alt="..."
+                  />
                 </div>
-                <label :for="article.url">See More...</label>
+                <div class="card-body">
+                  <input :id="article.url" class="ch" type="checkbox" />
+                  <p>{{ article.description }}</p>
+                  <p>{{ article.content }}</p>
+                  <div class="text">
+                    <p>{{ article.url }}</p>
+                    <p>{{ article.publishedAt }}</p>
+                    <p>{{ article.author }}</p>
+                    <p>{{ article.title }}</p>
+                    <label :for="article.url">See Less...</label>
+                  </div>
+                  <label :for="article.url">See More...</label>
+                </div>
               </div>
             </div>
           </div>
@@ -45,9 +55,21 @@
 
 <script>
 import axios from "axios";
+import NavBar from "@/components/NavBar.vue";
 import { useStore } from "vuex";
 import { computed } from "@vue/runtime-core";
 export default {
+  name: "home",
+  components: {
+    NavBar,
+  },
+  data() {
+  return {
+    searchQuery: '',
+    articles: []
+  }
+},
+
   setup() {
     const store = useStore();
     store.dispatch("fetchArticles");
@@ -56,24 +78,37 @@ export default {
       articles,
     };
   },
+
+  computed: {
+    filtered: function(){
+      return this.articles.filter((articles) => {
+        return articles.content.toLowerCase().match(this.searchQuery.toLowerCase())
+      });
+    }
+  }
 };
 </script>
 
 <style>
-.home{
+.home {
   display: inline-block;
   justify-content: center;
   align-items: center;
+}
+.homes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5rem;
 }
 .card {
   /* width: 80rem;  */
   border: 2px solid black;
   height: 100%;
-  background-color:rgb(54, 194, 241);
-  
+  background-color: antiquewhite;
 }
 
-.card:hover{
+.card:hover {
   transition: 0.5s;
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0.7);
   transform: scale(1.1);
@@ -84,7 +119,7 @@ export default {
   width: 80%;
 } */
 
-.align{
+.align {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -138,7 +173,7 @@ export default {
   flex-wrap: wrap;
 }
 
-.card-body p{
+.card-body p {
   width: 100%;
 }
 
@@ -147,7 +182,7 @@ export default {
   height: 20rem;
 }
 
-.ima{
+.ima {
   width: 30rem;
   height: 20rem;
   margin: 2rem;
@@ -212,5 +247,45 @@ label {
 .tit a {
   color: rgba(0, 0, 0, 0.622);
   text-decoration: none;
+}
+
+.search1 {
+  margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin: 38px;
+}
+
+.search {
+  width: 75vh;
+  height: 44px;
+  border-radius: 50px;
+  border: transparent;
+  /* text-align: center; */
+  padding-left: 30px;
+  padding-right: 30px;
+  font-size: 15px;
+  color: rgb(94, 94, 94);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+span {
+  margin-left: 1rem;
+}
+
+.search-outline {
+  /* margin-right: 2rem; */
+}
+
+@media screen and (max-width: 650px) {
+  
 }
 </style>
